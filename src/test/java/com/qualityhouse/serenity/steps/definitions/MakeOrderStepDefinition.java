@@ -65,9 +65,6 @@ public class MakeOrderStepDefinition {
         softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_NAME_LOCATOR))
                 .as("Product name")
                 .isEqualToIgnoringCase(product.getName());
-        softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_QUANTITY_LOCATOR))
-                .as("Product quantity")
-                .isEqualTo(data.get(0).getQuantity());
         softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_CHARACTERISTICS_LOCATOR))
                 .as("Product characteristics")
                 .contains(data.get(0).getSize())
