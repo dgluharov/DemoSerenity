@@ -12,10 +12,10 @@ import org.openqa.selenium.By;
 public class RegistrationPage
         extends PageObject
 {
-    @FindBy( id = "id_gender1" )
+    @FindBy(css = "[for='id_gender1']")
     public WebElementFacade mrRadioButton;
 
-    @FindBy( id = "id_gender2" )
+    @FindBy(css = "[for='id_gender2']")
     public WebElementFacade mrsRadioButton;
 
     @FindBy( name = "customer_firstname" )
@@ -44,14 +44,20 @@ public class RegistrationPage
 
     public static final By ADDRESS_STATE_DROP_DOWN_LOCATOR = By.name( "id_state" );
 
-    @FindBy( name = "postcode" )
+    @FindBy(name = "postcode")
     public WebElementFacade addressZipCodeField;
 
-    public static final By ADDRESS_COUNTRY_DROP_DOWN_LOCATOR = By.name( "id_country" );
+    public static final By ADDRESS_COUNTRY_DROP_DOWN_LOCATOR = By.name("id_country");
 
-    @FindBy( name = "phone_mobile" )
+    @FindBy(name = "phone_mobile")
     public WebElementFacade addressMobilePhoneField;
 
-    @FindBy( name = "alias" )
+    @FindBy(name = "alias")
     public WebElementFacade addressAliasField;
+
+    @FindBy(name = "submitAccount")
+    public WebElementFacade registerButton;
+
+    @FindBy(css = "div.alert")
+    public WebElementFacade alertDangerBox;
 }

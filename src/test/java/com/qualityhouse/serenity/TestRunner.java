@@ -9,10 +9,9 @@ import org.junit.runner.RunWith;
  * @since 12.03.20
  **/
 
-@RunWith( CucumberWithSerenity.class )
-@CucumberOptions( features = "features",
+@RunWith(CucumberWithSerenity.class)
+@CucumberOptions(features = "features",
         glue = "com/qualityhouse/serenity/steps/definitions",
-        tags = {""} )
-public class TestRunner
-{
+        tags = {"@fff"})
+public class TestRunner {
 }

@@ -1,6 +1,7 @@
 package com.qualityhouse.serenity.page_objects;
 
 import net.serenitybdd.core.pages.PageObject;
+import org.openqa.selenium.By;
 
 /**
  * @author yakimfb
@@ -9,4 +10,5 @@ import net.serenitybdd.core.pages.PageObject;
 public class BasePage
         extends PageObject
 {
+    public static final By ERROR_MESSAGE_LIST = By.cssSelector("div.alert-danger li");
 }

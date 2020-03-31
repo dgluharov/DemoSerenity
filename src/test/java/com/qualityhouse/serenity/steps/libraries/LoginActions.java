@@ -13,7 +13,6 @@ public class LoginActions
         extends BasesActions
 {
     private LoginPage loginPage;
-    private HomePage homePage;
 
     @Step
     public void logsInWithCredentials( User user )

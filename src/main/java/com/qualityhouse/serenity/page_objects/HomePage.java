@@ -16,4 +16,5 @@ public class HomePage
 
     @FindBy( css = "nav a.account" )
     public WebElementFacade userMenu;
+
 }
