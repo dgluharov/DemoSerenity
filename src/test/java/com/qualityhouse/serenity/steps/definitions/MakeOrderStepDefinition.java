@@ -65,7 +65,7 @@ public class MakeOrderStepDefinition {
 
         softly.assertThat(cartPageActions.readsTextFrom(TOTAL_PRODUCT_PRICE_LOCATOR))
                 .as("Total price for product without delivery taxes")
-                .contains(cartPageActions.calculateTotalPriceForProduct(product));
+                .contains(String.valueOf(product.getPrice()));
         softly.assertThat(cartPageActions.getProductName(cartPage.productName))
                 .as("Product name")
                 .isEqualToIgnoringCase(product.getName());
