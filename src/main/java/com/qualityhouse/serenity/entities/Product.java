@@ -7,13 +7,6 @@ public class Product {
     private String color;
     private double price;
 
-    public Product(Product product) {
-        this.name = "";
-        this.quantity = product.quantity;
-        this.size = product.size;
-        this.color = product.color;
-        this.price = 0.0;
-    }
 
     public String getName() {
         return name;

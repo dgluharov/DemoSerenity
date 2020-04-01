@@ -51,7 +51,6 @@ public class ProductPageActions
     }
 
     public void fillProductDetails(Product product) {
-        product.setName(readsTextFrom(PRODUCT_NAME_LOCATOR));
         product.setPrice(new Double(readsTextFrom(PRODUCT_PRICE_LOCATOR).substring(1)));
     }
 }

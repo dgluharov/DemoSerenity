@@ -15,11 +15,13 @@ import org.assertj.core.api.SoftAssertions;
 
 import java.util.List;
 
-import static com.qualityhouse.serenity.page_objects.CartPage.*;
+import static com.qualityhouse.serenity.page_objects.CartPage.PRODUCT_CHARACTERISTICS_LOCATOR;
+import static com.qualityhouse.serenity.page_objects.CartPage.TOTAL_PRODUCT_PRICE_LOCATOR;
 
 public class MakeOrderStepDefinition {
     WomenPage womenPage;
-    Product product;
+
+    CartPage cartPage;
 
     @Steps
     private WomenSectionBaseActions womenSectionBaseActions;
@@ -33,42 +35,47 @@ public class MakeOrderStepDefinition {
         womenPage.open();
     }
 
-    @And("^s?he selected the first product from list of products$")
+    @And("^s?he has selected the first product from list of products$")
     public void selectsTheFirstProductFromListOfProducts() {
         womenSectionBaseActions.selectsFirstProduct();
     }
 
-    @When("^(?:.*) chose his options from Product Page:$")
+    @When("^(?:.*) selects his options from Product Page:$")
     public void userChoseHisOptionsFromProductPage(List<Product> data) {
-        product = data.get(0);
+        Product product = data.get(0);
         productPageActions.fillProductDetails(product);
         productPageActions.fillOrderDetails(product);
     }
 
-    @And("^s?he added them to the cart$")
+    @Then("^s?he adds them to the cart$")
     public void userAddedThemToTheCart() {
         productPageActions.clickAddToCart();
     }
 
-    @Then("^s?he proceeds to Order Page$")
+    @When("^(?:.*) proceeds to Order Page$")
     public void userProceedsToOrderPage() {
         productPageActions.clickProceedToCheckoutButton();
     }
 
-    @And("^in the cart there are the following products with theirs characteristics:$")
-    public void inTheCartThereAreTheFollowingProductsWithTheirsCharacteristics(List<Product> data) {
+
+    @Then("^s?he should see the summary of his purchase:$")
+    public void heShouldSeeTheSummaryOfHisPurchase(List<Product> data) {
+        Product product = data.get(0);
         SoftAssertions softly = new SoftAssertions();
 
         softly.assertThat(cartPageActions.readsTextFrom(TOTAL_PRODUCT_PRICE_LOCATOR))
                 .as("Total price for product without delivery taxes")
                 .contains(cartPageActions.calculateTotalPriceForProduct(product));
-        softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_NAME_LOCATOR))
+        softly.assertThat(cartPageActions.getProductName(cartPage.productName))
                 .as("Product name")
                 .isEqualToIgnoringCase(product.getName());
+        softly.assertThat(cartPageActions.getQuantityOfProduct(cartPage.quantityField))
+                .as("Product quantity")
+                .isEqualTo(product.getQuantity());
         softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_CHARACTERISTICS_LOCATOR))
                 .as("Product characteristics")
-                .contains(data.get(0).getSize())
-                .contains(data.get(0).getColor());
+                .containsIgnoringCase(product.getSize())
+                .containsIgnoringCase(product.getColor());
 
         softly.assertAll();
     }
