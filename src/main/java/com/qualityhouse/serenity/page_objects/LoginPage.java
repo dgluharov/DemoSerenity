@@ -10,7 +10,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  * @since 12.03.20
  **/
 
-@DefaultUrl( "http://test.automationpractice.com/index.php?controller=authentication&back=my-account" )
+@DefaultUrl("/index.php?controller=authentication&back=my-account")
 public class LoginPage
         extends PageObject
 {

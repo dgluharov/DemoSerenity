@@ -16,4 +16,6 @@ public class CartPage extends BasePage {
 
     public static final By TOTAL_PRODUCT_PRICE_LOCATOR = By.id("total_product");
     public static final By PRODUCT_CHARACTERISTICS_LOCATOR = By.cssSelector(".cart_description > small > a");
+    public static final By PRODUCT_QUANTITY_LOCATOR = By.cssSelector(".cart_quantity_input");
+    public static final By PRODUCT_NAME_LOCATOR = By.cssSelector("td.cart_description > p:nth-child(1)");
 }

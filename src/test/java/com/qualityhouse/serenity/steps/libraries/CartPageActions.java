@@ -16,16 +16,6 @@ public class CartPageActions
     }
 
     @Step
-    public int getQuantityOfProduct(WebElement productQuantityLocator) {
-        return new Integer(productQuantityLocator.getAttribute("value"));
-    }
-
-    @Step
-    public String getProductName(WebElement productNameLocator) {
-        return productNameLocator.getText();
-    }
-
-    @Step
     public void opensCartPage() {
         cartPage.open();
     }

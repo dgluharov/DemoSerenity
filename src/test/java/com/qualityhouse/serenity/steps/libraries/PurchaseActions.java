@@ -2,14 +2,18 @@ package com.qualityhouse.serenity.steps.libraries;
 
 import com.qualityhouse.serenity.entities.Product;
 import com.qualityhouse.serenity.page_objects.ProductPage;
+import com.qualityhouse.serenity.page_objects.WomenPage;
+import com.qualityhouse.serenity.utils.SizeEnum;
 import net.thucydides.core.annotations.Step;
 
 import static com.qualityhouse.serenity.page_objects.ProductPage.*;
 
-public class ProductPageActions
+
+public class PurchaseActions
         extends BasesActions {
 
-    ProductPage productPage;
+    private WomenPage womenPage;
+    private ProductPage productPage;
 
 
     @Step
@@ -31,12 +35,10 @@ public class ProductPageActions
 
     @Step
     private void selectSize(String size) {
-        if (size.equalsIgnoreCase("s")) {
-            selectsFromDropDownAnItemByValue(SIZE_DROPDOWN_LOCATOR, "1");
-        } else if (size.equalsIgnoreCase("m")) {
-            selectsFromDropDownAnItemByValue(SIZE_DROPDOWN_LOCATOR, "2");
-        } else if (size.equalsIgnoreCase("l")) {
-            selectsFromDropDownAnItemByValue(SIZE_DROPDOWN_LOCATOR, "3");
+        if (size != null) {
+
+            selectsFromDropDownAnItemByValue(SIZE_DROPDOWN_LOCATOR, SizeEnum.valueOf(size).getValue());
+
         }
     }
 
@@ -53,11 +55,14 @@ public class ProductPageActions
         clicksOn(PROCEED_TO_CHECKOUT_BUTTON_LOCATOR);
     }
 
-    public String getProductName() {
-        return readsTextFrom(PRODUCT_NAME_LOCATOR);
-    }
 
     public double getProductPrice() {
         return Double.parseDouble(readsTextFrom(PRODUCT_PRICE_LOCATOR).substring(1));
     }
+
+    public void selectsFirstProduct() {
+        clicksOn(womenPage.firstProduct);
+    }
+
+
 }
