@@ -6,7 +6,6 @@ import com.qualityhouse.serenity.page_objects.WomenPage;
 import com.qualityhouse.serenity.steps.libraries.CartPageActions;
 import com.qualityhouse.serenity.steps.libraries.ProductPageActions;
 import com.qualityhouse.serenity.steps.libraries.WomenSectionBaseActions;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,13 +14,17 @@ import org.assertj.core.api.SoftAssertions;
 
 import java.util.List;
 
+import static com.qualityhouse.serenity.page_objects.ProductPage.SUCCESS_MESSAGE_ADDED_TO_CART;
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.qualityhouse.serenity.page_objects.CartPage.PRODUCT_CHARACTERISTICS_LOCATOR;
 import static com.qualityhouse.serenity.page_objects.CartPage.TOTAL_PRODUCT_PRICE_LOCATOR;
 
 public class MakeOrderStepDefinition {
-    WomenPage womenPage;
+    private WomenPage womenPage;
 
-    CartPage cartPage;
+    private CartPage cartPage;
+
+    private Product product;
 
     @Steps
     private WomenSectionBaseActions womenSectionBaseActions;
@@ -35,47 +38,48 @@ public class MakeOrderStepDefinition {
         womenPage.open();
     }
 
-    @And("^s?he has selected the first product from list of products$")
+    @Given("^s?he has selected the first product from products list$")
+    @When("^(?:.*) selects the first product from products list$")
     public void selectsTheFirstProductFromListOfProducts() {
         womenSectionBaseActions.selectsFirstProduct();
     }
 
-    @When("^(?:.*) selects his options from Product Page:$")
+    @When("^s?he adds the product to the cart with order details:$")
     public void userChoseHisOptionsFromProductPage(List<Product> data) {
-        Product product = data.get(0);
-        productPageActions.fillProductDetails(product);
-        productPageActions.fillOrderDetails(product);
-    }
+        this.product = data.get(0);
+        this.product.setUnitPrice(productPageActions.getProductPrice());
+        this.product.setName(productPageActions.getProductName());
 
-    @Then("^s?he adds them to the cart$")
-    public void userAddedThemToTheCart() {
+        productPageActions.fillOrderDetails(this.product);
         productPageActions.clickAddToCart();
     }
 
-    @When("^(?:.*) proceeds to Order Page$")
+
+    @Then("^the product should be added to the cart$")
     public void userProceedsToOrderPage() {
-        productPageActions.clickProceedToCheckoutButton();
+        assertThat(productPageActions.readsTextFrom(SUCCESS_MESSAGE_ADDED_TO_CART))
+                .containsIgnoringCase("Product successfully added to your shopping cart");
     }
 
 
-    @Then("^s?he should see the summary of his purchase:$")
-    public void heShouldSeeTheSummaryOfHisPurchase(List<Product> data) {
-        Product product = data.get(0);
+    @Then("^correct order details are displayed in the cart page$")
+    public void correctOrderDetailsAreDisplayed() {
+        cartPageActions.opensCartPage();
         SoftAssertions softly = new SoftAssertions();
 
         softly.assertThat(cartPageActions.readsTextFrom(TOTAL_PRODUCT_PRICE_LOCATOR))
                 .as("Total price for product without delivery taxes")
-                .contains(String.valueOf(product.getPrice()));
+                .contains(cartPageActions.calculateTotalPriceForProduct(this.product));
         softly.assertThat(cartPageActions.getProductName(cartPage.productName))
                 .as("Product name")
-                .isEqualToIgnoringCase(product.getName());
+                .isEqualToIgnoringCase(this.product.getName());
         softly.assertThat(cartPageActions.getQuantityOfProduct(cartPage.quantityField))
                 .as("Product quantity")
                 .isEqualTo(product.getQuantity());
         softly.assertThat(cartPageActions.readsTextFrom(PRODUCT_CHARACTERISTICS_LOCATOR))
                 .as("Product characteristics")
-                .containsIgnoringCase(product.getSize())
-                .containsIgnoringCase(product.getColor());
+                .containsIgnoringCase(this.product.getSize())
+                .containsIgnoringCase(this.product.getColor());
 
         softly.assertAll();
     }

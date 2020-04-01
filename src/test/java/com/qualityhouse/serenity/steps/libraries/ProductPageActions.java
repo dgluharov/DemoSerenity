@@ -11,6 +11,7 @@ public class ProductPageActions
 
     ProductPage productPage;
 
+
     @Step
     public void fillOrderDetails(Product product) {
         selectQuantity(product.getQuantity());
@@ -23,11 +24,12 @@ public class ProductPageActions
         clicksOn(ADD_TO_CART_BUTTON);
     }
 
+    @Step
     private void selectQuantity(int quantity) {
         fillsFieldWithData(QUANTITY_FIELD_LOCATOR, String.valueOf(quantity));
     }
 
-
+    @Step
     private void selectSize(String size) {
         if (size.equalsIgnoreCase("s")) {
             selectsFromDropDownAnItemByValue(SIZE_DROPDOWN_LOCATOR, "1");
@@ -38,6 +40,7 @@ public class ProductPageActions
         }
     }
 
+    @Step
     private void selectColor(String color) {
         if (color.trim().toLowerCase().equals("orange")) {
             clicksOn(ORANGE_COLOR_LOCATOR);
@@ -50,7 +53,11 @@ public class ProductPageActions
         clicksOn(PROCEED_TO_CHECKOUT_BUTTON_LOCATOR);
     }
 
-    public void fillProductDetails(Product product) {
-        product.setPrice(new Double(readsTextFrom(PRODUCT_PRICE_LOCATOR).substring(1)));
+    public String getProductName() {
+        return readsTextFrom(PRODUCT_NAME_LOCATOR);
+    }
+
+    public double getProductPrice() {
+        return Double.parseDouble(readsTextFrom(PRODUCT_PRICE_LOCATOR).substring(1));
     }
 }

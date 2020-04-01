@@ -1,14 +1,11 @@
 Feature: Fill Shopping Cart
 
-  @fff
-  Scenario: Successful Adding a Product in Cart
+  @Debug
+  Scenario: Add Product to Cart
     Given John is on the Women's Page
-    And he has selected the first product from list of products
-    When John selects his options from Product Page:
+    When John selects the first product from products list
+    And he adds the product to the cart with order details:
       | quantity | size | color |
       | 2        | L    | blue  |
-    Then he adds them to the cart
-    When John proceeds to Order Page
-    Then he should see the summary of his purchase:
-      | name                        | quantity | size | color | price |
-      | Faded Short Sleeve T-shirts | 2        | L    | Blue  | 33.02 |
+    Then the product should be added to the cart
+    And correct order details are displayed in the cart page

@@ -6,7 +6,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 
-@DefaultUrl("http://test.automationpractice.com/index.php?id_category=3&controller=category")
+@DefaultUrl("/index.php?id_category=3&controller=category")
 public class WomenPage
         extends PageObject {
 

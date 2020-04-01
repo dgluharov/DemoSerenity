@@ -5,7 +5,7 @@ public class Product {
     private int quantity;
     private String size;
     private String color;
-    private double price;
+    private double unitPrice;
 
 
     public String getName() {
@@ -40,12 +40,12 @@ public class Product {
         this.color = color;
     }
 
-    public double getPrice() {
-        return price;
+    public double getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setUnitPrice(double price) {
+        this.unitPrice = price;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Product {
                 ", quantity=" + quantity +
                 ", size='" + size + '\'' +
                 ", color='" + color + '\'' +
-                ", price=" + price +
+                ", price=" + unitPrice +
                 '}';
     }
 }
