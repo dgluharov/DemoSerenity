@@ -15,7 +15,7 @@ Feature: Account Registration
   <li>Correct error messages are displayed for the invalid data/li>
   </ul>
 
-
+#  @Debug
   Scenario: Successful Registration
     Given John is on the login page
     And he has started an account registration with "jhondsnow[4a]@south.go" email
@@ -29,6 +29,7 @@ Feature: Account Registration
     Then the registration is successful
     And John is logged in successfully
 
+#  @Debug
   Scenario Outline: Unsuccessful Registration
   ! System should not allow user registration with invalid data
     Given John is on the login page

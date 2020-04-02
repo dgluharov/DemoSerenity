@@ -3,10 +3,13 @@ package com.qualityhouse.serenity.steps.libraries;
 import com.qualityhouse.serenity.entities.Product;
 import com.qualityhouse.serenity.page_objects.ProductPage;
 import com.qualityhouse.serenity.page_objects.WomenPage;
+import com.qualityhouse.serenity.utils.ColorEnum;
 import com.qualityhouse.serenity.utils.SizeEnum;
 import net.thucydides.core.annotations.Step;
+import org.openqa.selenium.By;
 
-import static com.qualityhouse.serenity.page_objects.ProductPage.*;
+import static com.qualityhouse.serenity.page_objects.ProductPage.QUANTITY_FIELD_LOCATOR;
+import static com.qualityhouse.serenity.page_objects.ProductPage.SIZE_DROPDOWN_LOCATOR;
 
 
 public class PurchaseActions
@@ -16,17 +19,12 @@ public class PurchaseActions
     private ProductPage productPage;
 
 
-    @Step
     public void fillOrderDetails(Product product) {
         selectQuantity(product.getQuantity());
         selectSize(product.getSize());
         selectColor(product.getColor());
     }
 
-    @Step
-    public void clickAddToCart() {
-        clicksOn(ADD_TO_CART_BUTTON);
-    }
 
     @Step
     private void selectQuantity(int quantity) {
@@ -44,25 +42,12 @@ public class PurchaseActions
 
     @Step
     private void selectColor(String color) {
-        if (color.trim().toLowerCase().equals("orange")) {
-            clicksOn(ORANGE_COLOR_LOCATOR);
-        } else {
-            clicksOn(BLUE_COLOR_LOCATOR);
+        if (color != null) {
+            clicksOn(By.name(ColorEnum.valueOf(color.toUpperCase()).getValue()));
         }
-    }
-
-    public void clickProceedToCheckoutButton() {
-        clicksOn(PROCEED_TO_CHECKOUT_BUTTON_LOCATOR);
-    }
-
-
-    public double getProductPrice() {
-        return Double.parseDouble(readsTextFrom(PRODUCT_PRICE_LOCATOR).substring(1));
     }
 
     public void selectsFirstProduct() {
         clicksOn(womenPage.firstProduct);
     }
-
-
 }

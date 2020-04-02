@@ -6,6 +6,7 @@ Feature: Login
   Background:
     Given John is on the login page
 
+#  @Debug
   Scenario: Successful Declarative Login
     When John logs in with:
       | email            | password   |

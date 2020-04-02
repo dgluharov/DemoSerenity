@@ -1,8 +1,9 @@
 package com.qualityhouse.serenity.utils;
 
 public enum ColorEnum {
-    BLUE("blue"),
-    ORANGE("orange");
+
+    ORANGE("Orange"),
+    BLUE("Blue");
 
     private String value;
 
@@ -10,7 +11,7 @@ public enum ColorEnum {
         this.value = value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public String getValue() {
+        return value;
     }
 }

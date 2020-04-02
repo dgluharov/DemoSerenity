@@ -88,7 +88,6 @@ public class BasesActions {
                 .click();
     }
 
-    @Step
     public String readsTextFrom(By locator) {
         return readsTextFrom((WebElementFacade) currentPage.find(locator));
     }
@@ -99,13 +98,12 @@ public class BasesActions {
         return Integer.parseInt(numericText);
     }
 
-    @Step
     public int readsNumericValueFrom(By locator) {
         String numericText = currentPage.find(locator).getValue();
         return Integer.parseInt(numericText);
     }
 
-    @Step
+
     public double readsDoubleFrom(By locator) {
         String numericText = readsTextFrom((WebElementFacade) currentPage.find(locator));
         NumberFormat number = NumberFormat.getCurrencyInstance(Locale.US);

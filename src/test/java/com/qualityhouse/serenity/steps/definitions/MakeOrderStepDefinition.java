@@ -47,7 +47,7 @@ public class MakeOrderStepDefinition {
         this.product.setName(purchaseActions.readsTextFrom(PRODUCT_NAME_LOCATOR));
 
         purchaseActions.fillOrderDetails(this.product);
-        purchaseActions.clickAddToCart();//TODO clicksOn()
+        purchaseActions.clicksOn(ADD_TO_CART_BUTTON);
     }
 
 

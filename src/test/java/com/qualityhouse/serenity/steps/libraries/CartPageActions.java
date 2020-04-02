@@ -10,7 +10,6 @@ public class CartPageActions
 
     private CartPage cartPage;
 
-    @Step
     public String calculateTotalPriceForProduct(Product product) {
         return String.format("%.2f", product.getUnitPrice() * product.getQuantity());
     }
