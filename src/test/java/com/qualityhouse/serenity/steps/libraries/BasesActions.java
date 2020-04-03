@@ -2,14 +2,12 @@ package com.qualityhouse.serenity.steps.libraries;
 
 import com.qualityhouse.serenity.page_objects.BasePage;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.actions.Scroll;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,6 +17,7 @@ import java.util.Locale;
  **/
 public class BasesActions {
     private BasePage currentPage;
+
 
     @Step("Enters '{1}' in field {0}")
     protected void fillsFieldWithData(WebElementFacade fieldElement,

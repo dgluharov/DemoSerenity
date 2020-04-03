@@ -5,9 +5,11 @@ import com.qualityhouse.serenity.page_objects.ProductPage;
 import com.qualityhouse.serenity.page_objects.WomenPage;
 import com.qualityhouse.serenity.utils.ColorEnum;
 import com.qualityhouse.serenity.utils.SizeEnum;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.Step;
 import org.openqa.selenium.By;
 
+import static com.qualityhouse.serenity.page_objects.BasePage.PRODUCT_NAME;
 import static com.qualityhouse.serenity.page_objects.ProductPage.QUANTITY_FIELD_LOCATOR;
 import static com.qualityhouse.serenity.page_objects.ProductPage.SIZE_DROPDOWN_LOCATOR;
 
@@ -47,7 +49,7 @@ public class PurchaseActions
         }
     }
 
-    public void selectsFirstProduct() {
-        clicksOn(womenPage.firstProduct);
+    public void selectProductFromProductList(int productNumber) {
+        clicksOn((WebElementFacade) womenPage.productContainer.get(productNumber).find(PRODUCT_NAME));
     }
 }

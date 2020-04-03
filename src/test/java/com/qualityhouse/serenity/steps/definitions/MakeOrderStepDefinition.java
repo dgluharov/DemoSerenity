@@ -37,7 +37,7 @@ public class MakeOrderStepDefinition {
     @Given("^s?he has selected the first product from products list$")
     @When("^(?:.*) selects the first product from products list$")
     public void selectsTheFirstProductFromListOfProducts() {
-        purchaseActions.selectsFirstProduct();
+        purchaseActions.selectProductFromProductList(0);
     }
 
     @When("^s?he adds the product to the cart with order details:$")
