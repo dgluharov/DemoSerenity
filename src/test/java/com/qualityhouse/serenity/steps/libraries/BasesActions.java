@@ -62,11 +62,6 @@ public class BasesActions {
         }
     }
 
-    @Step
-    protected void clicksOn(WebElementFacade buttonOrLink) {
-        buttonOrLink.waitUntilClickable()
-                .click();
-    }
 
     @Step
     public boolean canSeeElement(WebElementFacade webElement) {
@@ -78,6 +73,12 @@ public class BasesActions {
         return webElement.waitUntilVisible()
                 .getText()
                 .trim();
+    }
+
+    @Step
+    protected void clicksOn(WebElementFacade buttonOrLink) {
+        buttonOrLink.waitUntilClickable()
+                .click();
     }
 
     @Step
